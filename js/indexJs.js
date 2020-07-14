@@ -15,6 +15,6 @@ $(document).ready(function(){
 			$("body").css({"background-image":"url("+toggleImageURL+")"});
 	}
 	
-	setInterval(backgroundImageToggle,3000)
+	setInterval(backgroundImageToggle,5000)
 
 })
