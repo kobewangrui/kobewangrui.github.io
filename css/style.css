@@ -116,7 +116,15 @@ body {
   background-color: #eee;
   overflow: auto;
   padding-top: 5px;
-  background-image:url('../bg_img.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-size:cover;
+	transition:All 1s ease-in-out;
+  transition-property:all;
+  transition-duration:1s;
+  transition-timing-function:ease-in-out;
+  transition-delay:initial;
+  background-image:url('../images/pub_80.jpg');
 }
 @media screen and (max-width: 1024px) {
   body {
@@ -137,10 +145,10 @@ a {
   top: 30px;
   left: 50%;
   width: 1000px;
-  color: #000;
+  color: red;
   margin-left: -500px;
   font-size: 12px;
-  text-align: right;
+  text-align: left;
 }
 @media screen and (max-width: 1024px) {
   .last-modified {
