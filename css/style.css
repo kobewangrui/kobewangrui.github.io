@@ -145,9 +145,10 @@ a {
   top: 30px;
   left: 50%;
   width: 1000px;
-  color: red;
+  color: #000;
   margin-left: -500px;
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: bold;
   text-align: left;
 }
 @media screen and (max-width: 1024px) {
@@ -216,9 +217,8 @@ a {
 .content-hd .avator {
   display: block;
   width: 200px;
-  height: 200px;
   margin: 0 auto;
-  border-radius:50%;
+  border-radius: 20px
 }
 @media screen and (max-width: 720px) {
   .content-hd .avator {
