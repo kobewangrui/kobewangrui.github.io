@@ -1,426 +1,194 @@
-/* ==========================================================================
-   王睿龙 · 简历 —— 单页 A4 / Apple 式留白与克制用色 / 无表格线
-   版心 794×1123px = A4 210×297mm（96dpi），屏幕预览与 PDF 完全一致
-   ========================================================================== */
-
 :root {
-    --ink: #1d1d1f;          /* Apple 主文字 */
-    --ink-2: #424245;
-    --muted: #5f5f66;        /* Apple 次级文字 */
-    --faint: #86868b;
-
-    --paper: #ffffff;
-    --fill: #f5f5f7;         /* Apple 浅灰面板 */
-    --line: #e8e8ed;
-
-    --accent: #0071e3;       /* Apple 蓝 */
-    --accent-2: #2997ff;
-
-    --sans: -apple-system, BlinkMacSystemFont, "SF Pro SC", "SF Pro Text",
-        "PingFang SC", system-ui, "Segoe UI", "Microsoft YaHei",
-        "Hiragino Sans GB", sans-serif;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono",
-        Consolas, monospace;
+    color-scheme: light;
+    --ink: #17283b;
+    --text: #344357;
+    --muted: #536275;
+    --accent: #235f7c;
+    --accent-strong: #174764;
+    --line: #d8e5ea;
+    --timeline: #73a3b9;
+    --paper: #fff;
+    --canvas: #edf2f5;
+    --wash: linear-gradient(115deg, #f0f8f7 0%, #f3f8fc 57%, #e9ecfb 100%);
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
-* { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
-
-body {
-    margin: 0;
-    background: #f2f2f5;
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 12.4px;
-    line-height: 1.72;
-    letter-spacing: .01em;
-    -webkit-font-smoothing: antialiased;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
-
-a { color: inherit; text-decoration: none; }
-a:hover { color: var(--accent); }
-
-/* ---------- 纸张 ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--canvas); color: var(--ink); font: 14px/1.68 var(--sans); }
+h1, h2, h3, p { margin: 0; }
+a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+a:hover { text-decoration: underline; text-underline-offset: .2em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 .sheet {
-    width: 794px;
-    min-height: 1123px;
+    --inset: clamp(30px, 6vw, 64px);
+    width: min(940px, calc(100% - 56px));
     margin: 32px auto;
-    padding: 30px 56px 0;
     background: var(--paper);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, .12), 0 1px 0 rgba(0, 0, 0, .04);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    box-shadow: 0 20px 60px rgb(30 62 83 / 12%), 0 1px 3px rgb(30 62 83 / 10%);
 }
 
-/* ---------- 报头 ---------- */
-
-.name {
-    margin: 0;
-    font-size: 38px;
-    line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: var(--ink);
-    display: flex;
-    align-items: baseline;
-}
-
-.name .latin {
-    font: 500 9px/1 var(--mono);
-    letter-spacing: .26em;
-    color: var(--faint);
-    margin-left: 16px;
-    white-space: nowrap;
-}
-
-.role {
-    margin: 10px 0 0;
-    font-size: 14.5px;
-    line-height: 1.5;
-    font-weight: 400;
-    letter-spacing: .01em;
-    color: var(--muted);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.role .pdot { margin: 0 7px; color: #c7c7cc; }
-
-.role .state {
-    margin-left: 12px;
-    padding: 2px 8px;
-    border-radius: 100px;
-    background: var(--fill);
-    color: var(--muted);
-    font-size: 10.6px;
-    letter-spacing: .02em;
-}
-
-.contact {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 3px 0;
-    margin: 14px 0 0;
-    padding: 0;
-    list-style: none;
-    font-size: 11.4px;
-    letter-spacing: .01em;
-    color: var(--muted);
-}
-
-.contact li { display: flex; align-items: center; }
-
-.contact li + li::before {
-    content: "·";
-    margin: 0 9px;
-    color: #c7c7cc;
-}
-
-.contact .k {
-    font-size: 8.6px;
-    letter-spacing: .14em;
-    color: var(--faint);
-    margin-right: 6px;
-}
-
-.contact a:hover { color: var(--accent); }
-
-/* ---------- 摘要 ---------- */
-
-.summary {
-    margin: 16px 0 0;
-    font-size: 12.6px;
-    line-height: 1.74;
-    color: var(--ink-2);
-    letter-spacing: .01em;
-}
-
-.summary b {
-    font-weight: 600;
-    color: var(--ink);
-    font-family: var(--mono);
-    font-size: 11.6px;
-    letter-spacing: 0;
-}
-
-/* ---------- 三个数字：Apple 式圆角浅灰块 ---------- */
-
-.tiles {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 13px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.tiles li {
-    background: var(--fill);
-    border-radius: 14px;
-    padding: 9px 13px 10px;
-}
-
-.tiles b {
-    display: block;
-    font-size: 19px;
-    line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: -.02em;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-}
-
-.tiles b i { font-style: normal; font-size: 12px; }
-
-.tiles span {
-    display: block;
-    margin-top: 3px;
-    font-size: 10.6px;
-    line-height: 1.4;
-    letter-spacing: .02em;
-    color: var(--muted);
-}
-
-/* ---------- 区块 ---------- */
-
-.sec {
-    margin-top: 18px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-}
-
-.sec:first-of-type { margin-top: 16px; }
-
-.sec-h {
-    margin: 0 0 8px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    color: var(--ink);
-}
-
-.sec-h .num {
-    font: 600 9.5px/1 var(--mono);
-    letter-spacing: .08em;
-    color: var(--accent);
-    margin-right: 8px;
-    vertical-align: 2px;
-}
-
-/* ---------- 技能：一行一句，标签加粗 ---------- */
-
-.stack { margin: 0; }
-
-.stack p {
-    margin: 0 0 5px;
-    font-size: 12.2px;
-    line-height: 1.72;
-    color: var(--muted);
-}
-
-.stack p:last-child { margin-bottom: 0; }
-
-.stack b {
-    font-weight: 600;
-    color: var(--ink);
-    margin-right: 10px;
-    letter-spacing: .01em;
-}
-
-/* ---------- 经历 ---------- */
-
-.job + .job { margin-top: 13px; }
-
-.job-hd {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin: 0;
-    font-size: 13.4px;
-    font-weight: 400;
-    letter-spacing: .01em;
-    line-height: 1.45;
-    color: var(--ink);
-}
-
-.job-hd .co {
-    font-weight: 600;
-    color: var(--ink);
-}
-
-.job-hd .loc {
-    margin-left: 7px;
-    font-size: 11.4px;
-    font-weight: 400;
-    color: var(--faint);
-}
-
-.job-hd .role {
-    font-size: 11.2px;
-    font-weight: 400;
-    color: var(--accent);
-    white-space: nowrap;
-}
-
-.job-hd .when {
-    margin-left: auto;
-    font: 400 10px/1.75 var(--mono);
-    letter-spacing: 0;
-    color: var(--faint);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-    padding-left: 10px;
-}
-
-.pts {
-    margin: 2px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.pts li {
+.mast {
     position: relative;
-    padding-left: 12px;
-    margin-bottom: 1px;
-    font-size: 12.2px;
-    line-height: 1.66;
-    color: var(--muted);
+    isolation: isolate;
+    overflow: hidden;
+    padding: 32px var(--inset) 22px;
+    border-top: 4px solid #49899e;
+    border-bottom: 1px solid var(--line);
+    background: var(--wash);
 }
 
-.pts li::before {
-    content: "";
+.mast-graphic {
     position: absolute;
-    left: 1px;
-    top: .82em;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: #c2cde4;
+    z-index: -1;
+    top: -15px;
+    right: 16px;
+    width: 355px;
+    height: auto;
+    opacity: .78;
+    pointer-events: none;
 }
 
-.pts b {
-    font-weight: 600;
-    color: var(--ink);
-    margin-right: 7px;
-}
-
-/* ---------- 教育 ---------- */
-
-.edu {
-    margin: 0;
-    font-size: 12.2px;
-    line-height: 1.75;
-    color: var(--muted);
-}
-
-.edu b { font-weight: 600; color: var(--ink); margin-right: 10px; }
-
-.edu .when {
-    font: 400 10px/1.75 var(--mono);
-    color: var(--faint);
-    margin-left: 6px;
-}
-
-/* ---------- 页脚 ---------- */
-
-.foot {
-    margin-top: auto;
-    padding: 8px 0 9px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font: 400 8.8px/1 var(--mono);
-    letter-spacing: .12em;
-    color: #c0c0c5;
-}
-
-.pdf-link {
-    margin-left: 12px;
+.name-line { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.identity h1 { font-size: clamp(42px, 5.7vw, 57px); line-height: 1.08; letter-spacing: -.035em; font-weight: 750; }
+.latin {
+    display: inline-block;
+    margin-left: 13px;
     color: var(--accent);
-    letter-spacing: .06em;
+    font: 600 11px/1.4 var(--mono);
+    letter-spacing: .16em;
+    white-space: nowrap;
+}
+.download {
+    flex: none;
+    padding: 5px 11px;
+    color: var(--accent-strong);
+    background: rgb(255 255 255 / 83%);
+    border: 1px solid #cbdde8;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 650;
+}
+.position { margin-top: 8px; font-size: 18px; font-weight: 700; line-height: 1.4; }
+.focus { margin-top: 4px; color: var(--text); font-size: 13px; }
+.availability { display: inline-block; margin-left: 12px; color: var(--accent-strong); font-weight: 650; }
+.contact { display: flex; flex-wrap: wrap; gap: 3px 19px; padding: 0; margin: 13px 0 0; list-style: none; font-size: 12px; }
+.contact li { min-width: 0; }
+.contact a { color: var(--text); }
+
+.body { padding: 24px var(--inset) 18px; }
+.section + .section { margin-top: 23px; }
+.section h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin: 0 0 7px;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 750;
+    letter-spacing: .015em;
+}
+.section-index { color: var(--accent); font: 600 11px/1 var(--mono); letter-spacing: .06em; }
+.education p { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1px 14px; color: var(--text); }
+.education strong, .skill-list strong, .points strong { color: var(--ink); font-weight: 700; }
+.graduation { color: var(--accent); font-weight: 650; white-space: nowrap; }
+.skill-list { color: var(--text); }
+.skill-list p + p { margin-top: 2px; }
+.skill-list strong { margin-right: .35em; }
+
+.experience {
+    border-top: 1px solid var(--line);
+    padding-top: 19px;
+}
+.experience-intro { margin-bottom: 17px; }
+.summary { color: var(--text); }
+.summary strong { color: var(--ink); }
+.highlights { display: flex; flex-wrap: wrap; gap: 2px 21px; margin: 7px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 12px; }
+.highlights strong { color: var(--accent-strong); font-variant-numeric: tabular-nums; }
+
+.timeline { --date-col: 99px; --gutter: 25px; --dot: 11px; padding: 0; margin: 0; list-style: none; }
+.entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--date-col) minmax(0, 1fr);
+    gap: var(--gutter);
+    padding-bottom: 16px;
+}
+.entry:last-child { padding-bottom: 0; }
+.entry::before, .entry::after { content: ""; position: absolute; left: var(--date-col); }
+.entry:not(:last-child)::before { top: 10px; bottom: -10px; width: 1.5px; background: var(--timeline); transform: translateX(-50%); }
+.entry::after {
+    top: 5px;
+    width: var(--dot);
+    height: var(--dot);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--paper);
+    transform: translateX(-50%);
+}
+.entry:first-child::after { background: var(--accent); box-shadow: 0 0 0 3px #dfedf2; }
+.period { padding-right: 16px; color: var(--accent-strong); font: 700 14px/1.5 var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+.period-end { display: block; font-size: 12px; font-weight: 500; }
+.job h3 { font-size: 16px; font-weight: 750; line-height: 1.35; }
+.location { margin-left: .6em; white-space: nowrap; color: var(--muted); font-size: .77em; font-weight: 500; }
+.job-role { margin-top: 2px; color: var(--accent-strong); font-size: 12px; font-weight: 650; }
+.points { margin: 3px 0 0; padding-left: 1.05em; color: var(--text); }
+.points li::marker { color: var(--accent); font-size: .8em; }
+.points li + li { margin-top: 2px; }
+.points strong { margin-right: .28em; }
+.foot { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-top: 19px; padding-top: 9px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.folio { font-family: var(--mono); }
+
+@media screen and (max-width: 660px) {
+    .sheet { --inset: 22px; width: 100%; margin: 0; box-shadow: none; }
+    .mast { padding-block: 25px 17px; }
+    .mast-graphic { width: 240px; right: -49px; top: -32px; opacity: .36; }
+    .identity h1 { font-size: 41px; }
+    .latin { display: block; margin: 4px 0 0; font-size: 9px; }
+    .position { margin-top: 8px; font-size: 16px; }
+    .availability { display: block; margin: 2px 0 0; }
+    .contact { gap: 3px 14px; }
+    .body { padding-top: 20px; }
+    .section + .section { margin-top: 19px; }
+    .section h2 { font-size: 17px; }
+    .education strong { width: 100%; }
+    .timeline { --gutter: 0; --date-col: 5px; --dot: 10px; }
+    .entry { display: block; padding-left: 23px; }
+    .entry::after { top: 5px; }
+    .period { padding: 0; margin-bottom: 3px; text-align: left; }
+    .period-end { display: inline; font-size: inherit; font-weight: inherit; margin-left: .45em; }
+    .job h3 { font-size: 15px; }
+    .folio { display: none; }
 }
 
+@page { size: A4; margin: 0; }
 @media print {
-    .pdf-link { display: none; }
-}
-
-/* ==========================================================================
-   窄屏
-   ========================================================================== */
-
-@media screen and (max-width: 861px) {
-    body { background: var(--paper); }
-
-    .sheet {
-        width: 100%;
-        min-height: 0;
-        margin: 0;
-        padding: 28px 20px 0;
-        box-shadow: none;
-        overflow: visible;
-    }
-
-    .name { font-size: 31px; }
-    .name .latin { display: none; }
-    .role { font-size: 13px; }
-    .role .state { margin-left: 0; margin-top: 6px; }
-
-    .contact { margin-top: 12px; font-size: 10.6px; }
-    .contact li + li::before { margin: 0 6px; }
-
-    .tiles { grid-template-columns: 1fr; gap: 8px; }
-    .tiles li { padding: 8px 12px 9px; }
-    .tiles b { font-size: 17px; }
-
-    .job-hd { flex-wrap: wrap; row-gap: 1px; }
-    .job-hd .role { white-space: normal; }
-    .job-hd .when {
-        order: 3;
-        width: 100%;
-        margin-left: 0;
-        padding-left: 0;
-        font-size: 9.6px;
-    }
-
-    .foot {
-        flex-wrap: wrap;
-        gap: 5px 12px;
-        padding: 12px 0 16px;
-        letter-spacing: .08em;
-    }
-
-    .foot span:last-child { display: none; }
-}
-
-/* ==========================================================================
-   打印：A4 无边距
-   ========================================================================== */
-
-@page {
-    size: A4;
-    margin: 0;
-}
-
-@media print {
-    html, body {
-        background: #fff;
-        margin: 0;
-        padding: 0;
-    }
-
-    .sheet {
-        width: 210mm;
-        height: 297mm;
-        min-height: 297mm;
-        margin: 0;
-        box-shadow: none;
-        overflow: hidden;
-    }
+    body { background: var(--paper); font-size: 9.65pt; line-height: 1.57; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .sheet { --inset: 14mm; width: auto; margin: 0; box-shadow: none; }
+    .mast { padding: 7mm var(--inset) 4.5mm; border-top-width: 1mm; }
+    .mast-graphic { width: 80mm; right: 5mm; top: -5mm; }
+    .identity h1 { font-size: 33pt; }
+    .latin { font-size: 8pt; }
+    .position { margin-top: 1.3mm; font-size: 12pt; }
+    .focus { margin-top: .65mm; font-size: 9pt; }
+    .contact { margin-top: 2mm; gap: .5mm 4mm; font-size: 8.15pt; }
+    .download { display: none; }
+    .body { padding: 4.5mm var(--inset) 5mm; }
+    .section + .section { margin-top: 4.25mm; }
+    .section h2 { margin-bottom: 1.2mm; font-size: 13pt; break-after: avoid; }
+    .section-index { font-size: 8.25pt; }
+    .experience { padding-top: 3.7mm; }
+    .experience-intro { margin-bottom: 3.2mm; }
+    .highlights { margin-top: 1.2mm; font-size: 8.55pt; }
+    .timeline { --date-col: 21mm; --gutter: 5.5mm; --dot: 2.45mm; }
+    .entry { padding-bottom: 3mm; break-inside: avoid; }
+    .entry:last-child { padding-bottom: 0; }
+    .period { padding-right: 3.5mm; font-size: 10.2pt; }
+    .period-end { font-size: 8.9pt; }
+    .job h3 { font-size: 11.3pt; }
+    .job-role { margin-top: .3mm; font-size: 8.6pt; }
+    .points { margin-top: .5mm; }
+    .points li + li, .skill-list p + p { margin-top: .3mm; }
+    .foot { margin-top: 3.6mm; padding-top: 1.6mm; font-size: 8pt; }
 }
