@@ -162,8 +162,8 @@ a:hover { text-decoration: underline; text-underline-offset: .2em; }
     .folio { display: none; }
 }
 
-/* Screen-only aurora: decorative layers move; text stays still. */
-@media screen {
+/* Shared aurora palette. Only the screen version animates. */
+@media screen, print {
     :root {
         --ink: #152035;
         --text: #334159;
@@ -173,8 +173,16 @@ a:hover { text-decoration: underline; text-underline-offset: .2em; }
         --line: #dce3ef;
         --timeline: #a6b1ce;
         --paper: #f7f9ff;
+        --mast-ink: #f6f8ff;
+        --mast-latin: #c7c5ff;
+        --mast-text: #e0e8ff;
+        --mast-link: #dce5ff;
+        --mast-accent: #9df0dc;
+        --mast-stripe: linear-gradient(90deg, #9b83ff, #78bdfd 49%, #76efd9);
     }
+}
 
+@media screen {
     body {
         isolation: isolate;
         background: #080e23;
@@ -219,10 +227,10 @@ a:hover { text-decoration: underline; text-underline-offset: .2em; }
         border: 0;
         border-bottom: 2px solid transparent;
         border-radius: 21px 21px 0 0;
-        color: #f6f8ff;
+        color: var(--mast-ink);
         background:
             linear-gradient(108deg, #0b132bfa 4%, #121934ed 53%, #171535a6) padding-box,
-            linear-gradient(90deg, #9b83ff, #78bdfd 49%, #76efd9) bottom / 100% 2px no-repeat border-box;
+            var(--mast-stripe) bottom / 100% 2px no-repeat border-box;
     }
     .mast-graphic { display: none; }
     .mast :focus-visible { outline-color: #9cf5e8; }
@@ -302,13 +310,25 @@ a:hover { text-decoration: underline; text-underline-offset: .2em; }
 @media print {
     body { background: var(--paper); font-size: 9.65pt; line-height: 1.57; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     .sheet { --inset: 14mm; width: auto; margin: 0; box-shadow: none; }
-    .mast { padding: 7mm var(--inset) 4.5mm; border-top-width: 1mm; }
-    .mast-graphic { width: 80mm; right: 5mm; top: -5mm; }
+    .mast {
+        padding: 7mm var(--inset) 4.5mm;
+        border: 0;
+        border-bottom: .7mm solid transparent;
+        color: var(--mast-ink);
+        background:
+            radial-gradient(ellipse 48% 125% at 89% 15%, #59429a, transparent 75%) padding-box,
+            radial-gradient(ellipse 45% 140% at 69% 110%, #1b626c, transparent 75%) padding-box,
+            linear-gradient(108deg, #0b132b 12%, #171a38 100%) padding-box,
+            var(--mast-stripe) bottom / 100% .7mm no-repeat border-box;
+    }
+    .mast-graphic { display: none; }
     .identity h1 { font-size: 33pt; }
-    .latin { font-size: 8pt; }
+    .latin { display: block; margin: 1.3mm 0 0; color: var(--mast-latin); font-size: 8pt; letter-spacing: .26em; }
     .position { margin-top: 1.3mm; font-size: 12pt; }
-    .focus { margin-top: .65mm; font-size: 9pt; }
+    .focus { margin-top: .65mm; color: var(--mast-text); font-size: 9pt; }
+    .availability { color: var(--mast-accent); }
     .contact { margin-top: 2mm; gap: .5mm 4mm; font-size: 8.15pt; }
+    .contact a { color: var(--mast-link); }
     .download { display: none; }
     .body { padding: 4.5mm var(--inset) 5mm; }
     .section + .section { margin-top: 4.25mm; }
@@ -324,6 +344,7 @@ a:hover { text-decoration: underline; text-underline-offset: .2em; }
     .period-end { font-size: 8.9pt; }
     .job h3 { font-size: 11.3pt; }
     .job-role { margin-top: .3mm; font-size: 8.6pt; }
+    .job h4 { margin: 1.2mm 0 .4mm; color: var(--accent-strong); font-size: 9.65pt; }
     .points { margin-top: .5mm; }
     .points li + li, .skill-list p + p { margin-top: .3mm; }
     .foot { margin-top: 3.6mm; padding-top: 1.6mm; font-size: 8pt; }
